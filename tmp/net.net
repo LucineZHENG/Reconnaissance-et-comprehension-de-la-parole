@@ -1,0 +1,19 @@
+VERSION=1.0
+N=8    L=9    
+I=0    W=!NULL               
+I=1    W=!NULL               
+I=2    W=sil                 
+I=3    W=sil                 
+I=4    W=w                   
+I=5    W=ee                  
+I=6    W=sil                 
+I=7    W=sil                 
+J=0     S=6    E=1    
+J=1     S=7    E=1    
+J=2     S=0    E=2    
+J=3     S=0    E=3    
+J=4     S=2    E=3    
+J=5     S=3    E=4    
+J=6     S=4    E=5    
+J=7     S=5    E=6    
+J=8     S=6    E=7    

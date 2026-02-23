@@ -1,0 +1,34 @@
+T1	sil rr o# d @ l a b ee l zz i k d @ l ee s p a j d y b rr e z i l e# p @ t i p #2 t u sil
+T2	sil e i l a f ee l @ p l ee z i rr d @ n u a# v w a j e s e d ee rr n j e m a j o l e k i p d @ f rr a# s sil
+T3	sil d o# k l @ d ee rr n j e a# d a t s ee #2 k o# n a rr @ s y d o# k e# sil
+T4	sil ee f rr a# s d a n m a rr k sil
+T5	sil v w a l a e i l ee a# f a s d @ n u l a sil
+T6	sil zz @ p a# s p a k i i ee b o k u s y p oo rr t ee rr b rr e z i l j e# s @ s w a rr d a# l e rr y sil
+T7	sil s ee p l y s d e s y p oo rr t ee rr f rr a# s ee k o# v a v w a rr e# sil
+T8	sil o# n a o# n a zz a# t i m a# #2 l @ f s ee n a k i k i v j e# n u v w a rr s @ s w a rr sil
+T9	sil d o# k o# v a o# v a o s i f ee rr a v ee k l e k a n a rr i a# m ee m t a# zz @ p a# s k i v o# p a rr t i s i p e o o p l y g rr o# m a t ss d @ f rr a# s sil
+T10	sil e b e# o v i rr zz i l p u rr l e# s t a# #2 a p a rr t i rr d @ d i s n #9 f #9 rr t rr a# t l @ l @ v i rr zz i l ee k o# p l ee p hh i s k o# o# f ee e# d i n e e# p #2 p l y t rr a# k i l zz y s k a v e# e y n #9 rr e a p rr ee v e# e y n #9 rr e b j e# sil
+T11	sil #2 l i b rr a t u l @ m o# d d @ v @ n i rr i s i hh m s a n u f ee p l ee z i rr a v ee k zz ee s p ee rr p a t rr o d @ d e b oo rr d @ m a# sil
+T12	sil a l oo rr l @ v i rr zz i l s ee t rr a# t t rr w a rr y d @ v ee rr d e# hh m sil
+T13	sil e b e# s ee l a rr y d @ v ee rr d e# s ee l a rr y d e k o m ee rr s a# s ee l a rr y k i b u zz a n a# t sil
+T14	sil v w a l a t u a f ee sil
+T15	sil e p hh i #2 b a l e a m i t j e a t u s l e o d i t #9 rr d @ l a p a rr d @ m a rr s ee l d @ s a j i sil
+T16	sil v w a l a sil
+T17	sil m ee rr s i sil
+T18	sil b o# s w a rr sil
+T19	sil w i sil
+T20	sil v u n a v e p a p #9 rr k @ l @ b a rr d @ rr @ p a a# zz o n a t i rr l e s y p oo rr t ee rr b rr e z i l j e# sil
+T21	sil s a v a ee t rr a# t u k a y n a# b j a# s ee k s t rr a oo rr d i n ee rr v u a t a# d e k o# b j e# d @ p ee rr s o n o v i rr zz i l sil
+T22	sil o# v a d o n e k a# m ee m l a d rr ee s d y v i rr zz i l k a f e a n a# t v u ee t s i t hh e u sil
+T23	sil e s ee l @ b a rr d @ m a rr s ee l d @ s a j i sil
+T24	sil s t e f a n sil
+T25	sil e b e# s ee s ee t rr ee t rr ee zz a# t i s t e f a n m ee rr s i sil
+T26	sil b o# m a t ss sil
+T27	sil e b ee l a# b j a# s e a l e m a rr s ee l d @ s a j i e t u s l e zz u #9 rr d @ d @ l e k i p d @ f rr a# s sil
+T28	sil e o# k o m a# s t j e# p a rr n a# t p hh i s k o# i e t ee i l i a k ee l k @ e# s t a# sil
+T29	sil e l a p l a zz d @ k o p a k a b a n a k i v u p rr o p o z zz y s k a d i s hh i t #9 rr t rr a# t y n b a t u k a d a a v ee k s a# m y z i s j e# a# s hh i t y n g rr a# d s a rr d i n a d a v a# l @ m a t ss e a p rr ee l @ m a t ss k o# s ee rr a b oo rr d o sil
+T30	sil rr @ t rr a# s m i s j o# s y rr e k rr a# zz e a# d y m a t ss f rr a# s b rr e z i l e g rr a# b a l a p rr ee l a l a rr a# k o# t rr sil
+T31	sil s a v a ss o f e hh m s @ s w a rr o v i rr zz i l k a f e sil
+T32	sil zz y s t a v a# d @ s @ k i t e d a v i d l @ t rr a d i s j o n ee l a zz e# d a d e m a n i f ee s t a s j o# a# f rr a# s l @ d ee rr n j e sil
+T33	sil w ee sil
+
