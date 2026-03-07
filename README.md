@@ -1,113 +1,112 @@
-# 语音识别与关键词检测  
-## Reconnaissance et compréhension de la parole
+# Reconnaissance et compréhension de la parole  
+## Détection de mots-clés basée sur les modèles de Markov cachés
 
-本项目基于 **隐马尔可夫模型（HMM, Hidden Markov Model）** 实现一个简单的 **语音关键词检测系统（Keyword Spotting, KWS）**，用于从连续语音中检测特定关键词。
+Ce projet implémente un système simple de **détection de mots-clés (Keyword Spotting, KWS)** basé sur les **modèles de Markov cachés (HMM, Hidden Markov Models)**.  
+L’objectif est de détecter des mots-clés spécifiques dans un flux de parole continu.
 
-项目语料来自 **足球主题的法语语音数据**，系统目标是在连续语音流中识别预定义关键词，同时忽略无关语音信息。  
+Le corpus utilisé dans ce projet provient d’enregistrements audio en français sur le thème du **football**. Le système vise à identifier des mots-clés prédéfinis dans un flux vocal continu tout en ignorant les segments non pertinents.
 
-该项目为 **Master 2 – Sciences du Langage / Langue et Informatique** 课程项目。
-
----
-
-# 项目目标
-
-- 构建基于 **HMM 的语音识别模型**
-- 实现 **关键词检测系统（Keyword Spotting）**
-- 训练和测试语音模型
-- 构建 **解码网络（Decoding Network）**
-- 分析识别结果与系统性能
-
-关键词检测适用于以下场景：
-
-- 语音助手唤醒词检测  
-- 媒体转录中的关键词定位  
-- 会议记录自动检索  
-- 语音信息检索系统  
+Ce projet a été réalisé dans le cadre du **Master 2 Sciences du Langage – parcours Langue et Informatique**.
 
 ---
 
-# 项目结构
+# Objectifs du projet
+
+- Construire un **modèle de reconnaissance vocale basé sur les HMM**
+- Implémenter un système de **détection de mots-clés (Keyword Spotting)**
+- Entraîner et tester les modèles acoustiques
+- Construire un **réseau de décodage (Decoding Network)**
+- Analyser les performances du système
+
+Les systèmes de détection de mots-clés sont utilisés dans plusieurs domaines :
+
+- Détection de mots d’activation pour les assistants vocaux
+- Localisation de mots-clés dans des transcriptions médiatiques
+- Recherche automatique dans des enregistrements de réunions
+- Systèmes de recherche d’information vocale
+
+---
+
+# Structure du projet
 
 ```
 Reconnaissance-et-comprehension-de-la-parole
 │
-├── Football/                # 语音数据、特征参数、HMM模型等
-├── configs/                 # 配置文件
-├── lists/                   # 字典、音素列表、网络结构等
-├── tmp/                     # 临时文件
-├── generateNet2.pl          # 生成关键词检测网络
-├── runAlign.pl              # 强制对齐（Forced Alignment）
-├── runApprentissage.pl      # 模型训练脚本
-├── runParamApp.pl           # 训练数据参数提取
-├── runParamTest.pl          # 测试数据参数提取
-├── runDetections1.pl        # 关键词检测实验 1
-├── runDetections2.pl        # 关键词检测实验 2
-├── runDetections3.pl        # 关键词检测实验 3
-├── transcription.txt        # 语音转录文本
-└── rapport.pdf              # 项目报告
+├── Football/                # Données audio, paramètres acoustiques, modèles HMM
+├── configs/                 # Fichiers de configuration
+├── lists/                   # Dictionnaires, listes de phonèmes, réseaux
+├── tmp/                     # Fichiers temporaires
+├── generateNet2.pl          # Génération du réseau de détection
+├── runAlign.pl              # Alignement forcé (Forced Alignment)
+├── runApprentissage.pl      # Script d'entraînement des modèles
+├── runParamApp.pl           # Extraction des paramètres (entraînement)
+├── runParamTest.pl          # Extraction des paramètres (test)
+├── runDetections1.pl        # Expérience de détection 1
+├── runDetections2.pl        # Expérience de détection 2
+├── runDetections3.pl        # Expérience de détection 3
+├── transcription.txt        # Transcriptions des données audio
+└── rapport.pdf              # Rapport du projet
 ```
 
 ---
 
-# 数据与关键词
+# Données et mots-clés
 
-项目中的关键词包括 **10 个词**，分为两类：
+Le système utilise **10 mots-clés**, répartis en deux catégories :
 
-## 1. 语料中频繁出现的词
+## 1. Mots fréquents dans le corpus
 
-- france
-- match
-- concert
-- monde
-- bresil
+- france  
+- match  
+- concert  
+- monde  
+- bresil  
 
-## 2. 足球主题词
+## 2. Mots thématiques liés au football
 
-- zidane
-- ballon
-- but
-- supporters
-- ronaldo
+- zidane  
+- ballon  
+- but  
+- supporters  
+- ronaldo  
 
-系统采用 **Keywords + Filler Model** 的解码网络结构，使系统可以区分：
+Le système utilise une architecture **Keywords + Filler Model**, permettant de distinguer :
 
-- 关键词
-- 非关键词语音
-- 静音段
-
----
-
-# 方法
-
-## 1 语料处理
-
-音频数据被分为：
-
-- **训练集**：每段音频前 2 分钟  
-- **测试集**：音频最后 1 分钟  
-
-训练数据被分割为多个 **语音轮次（Tours）** 并进行音素标注。
+- les mots-clés
+- la parole non pertinente
+- les segments de silence
 
 ---
 
-## 2 声学模型
+# Méthodologie
 
-本项目使用：
+## 1 Prétraitement du corpus
 
-**Hidden Markov Models (HMM)**
+Les données audio sont divisées en deux ensembles :
 
-主要步骤：
+- **Corpus d’entraînement** : les 2 premières minutes de chaque enregistrement  
+- **Corpus de test** : la dernière minute de l’audio  
 
-1. 提取 **MFCC 特征**
-2. 训练 **单音素 HMM**
-3. 进行 **强制对齐（Forced Alignment）**
-4. 更新模型参数
+Les données d’entraînement sont segmentées en plusieurs **tours de parole (Tours)** avec annotation phonétique.
 
 ---
 
-## 3 解码网络
+## 2 Modèles acoustiques
 
-解码网络结构：
+Le système utilise des **modèles de Markov cachés (HMM)**.
+
+Les étapes principales sont :
+
+1. Extraction des **coefficients MFCC**
+2. Entraînement de **modèles monophones**
+3. **Alignement forcé (Forced Alignment)**
+4. Mise à jour des paramètres des modèles
+
+---
+
+## 3 Réseau de décodage
+
+Structure du réseau :
 
 ```
 sil -> keyword -> sil
@@ -115,38 +114,36 @@ sil -> keyword -> sil
      filler
 ```
 
-其中：
+- **Keyword models** : modèles des mots-clés
+- **Filler / World model** : modélisation de la parole non pertinente
+- **sil** : silence
 
-- **Keyword models**：目标关键词  
-- **Filler model / World model**：非关键词语音  
-- **sil**：静音  
-
-识别过程使用 **Viterbi 算法**。
+Le processus de reconnaissance utilise **l’algorithme de Viterbi**.
 
 ---
 
-# 运行步骤
+# Étapes d’exécution
 
-## 1 训练模型
+## 1 Entraînement des modèles
 
 ```bash
 perl runParamApp.pl
 perl runApprentissage.pl
 ```
 
-## 2 构建解码网络
+## 2 Construction du réseau
 
 ```bash
 HParse configs/grammairePhoneme.txt configs/networkPhoneme
 ```
 
-## 3 生成测试特征
+## 3 Extraction des paramètres pour le test
 
 ```bash
 perl runParamTest.pl
 ```
 
-## 4 语音识别
+## 4 Reconnaissance vocale
 
 ```bash
 HVite -T 1 \
@@ -158,7 +155,7 @@ lists/phonesFootballHTK \
 donnees/Football/param/test/*.mfc
 ```
 
-## 5 结果评估
+## 5 Évaluation des résultats
 
 ```bash
 HResults -p \
@@ -169,9 +166,9 @@ donnees/Football/resultats/*.rec
 
 ---
 
-# 关键词检测实验
+# Expériences de détection de mots-clés
 
-关键词检测通过以下脚本运行：
+Les expériences de détection sont réalisées avec les scripts suivants :
 
 ```bash
 perl runDetections1.pl
@@ -179,63 +176,61 @@ perl runDetections2.pl
 perl runDetections3.pl
 ```
 
-并使用：
+Les résultats sont évalués avec :
 
 ```
 HResults
 ```
 
-评估识别性能。
+---
+
+# Résultats expérimentaux
+
+Les performances du système sont évaluées à l’aide des indicateurs suivants :
+
+- **Hits** : détections correctes
+- **False Alarms (FA)** : fausses alarmes
+- **Accuracy**
+- **Figure of Merit (FOM)**
+
+Les résultats montrent que :
+
+- certains mots-clés peuvent être détectés
+- le taux de fausses alarmes reste élevé
+- la **FOM reste proche de zéro**
+
+Les principales raisons sont :
+
+- durée limitée des données de test
+- grand nombre de fausses alarmes
+- paramètres du réseau de décodage encore à optimiser
 
 ---
 
-# 实验结果
-
-实验主要关注以下指标：
-
-- **Hits**：正确检测数  
-- **False Alarms (FAs)**：误检数  
-- **Accuracy**  
-- **Figure of Merit (FOM)**  
-
-实验结果显示：
-
-- 系统能够检测部分关键词  
-- 但 **误报率较高**  
-- 因此 **FOM 仍然接近 0**
-
-主要原因：
-
-- 测试语音较短  
-- 假警报过多  
-- 解码网络权重仍需优化  
-
----
-
-# 技术栈
+# Technologies utilisées
 
 - **HTK (Hidden Markov Model Toolkit)**
 - **Perl**
-- **Python**（用于部分语料处理）
-- **Praat**（语音标注）
+- **Python** (prétraitement des données)
+- **Praat** (annotation phonétique)
 
 ---
 
-# 改进方向
+# Perspectives d'amélioration
 
-未来可以从以下方面优化：
+Plusieurs améliorations sont possibles :
 
-- 使用更大的训练语料  
-- 改进音素词典  
-- 优化关键词网络结构  
-- 调整 **reward / penalty 参数**  
-- 引入深度学习模型  
-  - DNN-HMM  
-  - End-to-End ASR  
+- utiliser un corpus d’entraînement plus large
+- améliorer le dictionnaire phonétique
+- optimiser la structure du réseau de mots-clés
+- ajuster les paramètres de **reward / penalty**
+- intégrer des approches d’apprentissage profond :
+  - **DNN-HMM**
+  - **End-to-End ASR**
 
 ---
 
-# 作者
+# Auteur
 
 **ZHENG RUIXING**
 
